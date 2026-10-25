@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcome to Swastik's Server</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#170f22; --ink:#f6efe3; --muted:#b9aecb;
+    --ticket:#f5b82e; --ticket-ink:#2a1a05; --teal:#2ec4b6;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:dark}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:"DM Sans",system-ui,sans-serif; line-height:1.55;
+    background-image:radial-gradient(60rem 30rem at 50% -10%, #3a2257 0%, transparent 70%);
+    display:flex; flex-direction:column; align-items:center;
+    padding:clamp(1.5rem,5vw,4rem) 1.25rem;
+  }
+  main{width:100%; max-width:40rem}
+  h1{
+    font-family:Anton,Impact,sans-serif; font-weight:400;
+    font-size:clamp(2.6rem,10vw,5rem); line-height:1; letter-spacing:.01em; margin:0 0 1rem;
+  }
+  .lead{color:var(--muted); font-size:1.1rem; max-width:34rem; margin:0 0 2.5rem}
+  .ticket{
+    position:relative; background:var(--ticket); color:var(--ticket-ink);
+    border-radius:.9rem; padding:1.75rem 1.5rem 1.75rem 2rem; margin-bottom:2.5rem;
+    display:grid; gap:1.25rem; grid-template-columns:1fr auto; align-items:center;
+    -webkit-mask:radial-gradient(circle .7rem at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,
+                 radial-gradient(circle .7rem at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+            mask:radial-gradient(circle .7rem at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,
+                 radial-gradient(circle .7rem at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+  }
+  .ticket h2{font-family:Anton,Impact,sans-serif; font-weight:400; font-size:1.6rem; margin:0 0 .25rem}
+  .ticket p{margin:0; font-size:.98rem}
+  .enter{
+    display:inline-block; background:var(--ticket-ink); color:var(--ticket);
+    font:700 1.05rem "DM Sans",sans-serif; text-decoration:none;
+    padding:.95rem 1.5rem; border-radius:.6rem; white-space:nowrap;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .enter:hover{background:#000; transform:translateY(-2px)}
+  .enter:focus-visible{outline:3px solid var(--teal); outline-offset:3px}
+  h3{font-size:1.15rem; margin:0 0 .5rem}
+  .shelf{display:grid; gap:1.25rem; grid-template-columns:1fr 1fr; margin-bottom:2rem}
+  .shelf div{border-left:3px solid var(--teal); padding-left:.9rem}
+  .shelf p{margin:0; color:var(--muted); font-size:.97rem}
+  .note{color:var(--muted); font-size:.92rem; border-top:1px solid #ffffff1f; padding-top:1.25rem}
+  .note strong{color:var(--ink)}
+  .note a{color:var(--teal)}
+
+  .request{margin-bottom:2rem}
+  .request h3{margin-bottom:.25rem}
+  .request > p{margin:0 0 .9rem; color:var(--muted); font-size:.97rem}
+  .request form{display:grid; gap:.7rem}
+  .request input[type=text],.request textarea{
+    width:100%; background:#ffffff0d; color:var(--ink); border:1px solid #ffffff33;
+    border-radius:.5rem; padding:.8rem .9rem; font:inherit;
+  }
+  .request textarea{min-height:6.5rem; resize:vertical}
+  .request input:focus-visible,.request textarea:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+  .request button{
+    justify-self:start; background:var(--teal); color:#06231f; border:0; border-radius:.5rem;
+    padding:.8rem 1.4rem; font:700 1rem "DM Sans",sans-serif; cursor:pointer;
+  }
+  .request button:disabled{opacity:.6; cursor:wait}
+  .hp{position:absolute; left:-9999px; height:0; width:0; opacity:0}
+  #status{min-height:1.4rem; margin:0; font-size:.95rem}
+  @media (max-width:34rem){
+    .ticket{grid-template-columns:1fr}
+    .enter{text-align:center}
+    .shelf{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){.enter{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Welcome to Swastik&rsquo;s server</h1>
+  <p class="lead">A small private cinema I built on my own laptop. Movies and web series, ready to stream in your browser.</p>
+
+  <section class="ticket" aria-label="Enter the server">
+    <div>
+      <h2>Admit one</h2>
+      <p>You will need the username and password I gave you.</p>
+    </div>
+    <!-- Replace the address below if your Funnel link ever changes -->
+    <a class="enter" href="https://miracle.tailb5bf53.ts.net">Enter server</a>
+  </section>
+
+  <section class="shelf">
+    <div>
+      <h3>Movies</h3>
+      <p>About 50 films, from Hollywood classics to Indian hits, plus animation for a lazy afternoon.</p>
+    </div>
+    <div>
+      <h3>Web series</h3>
+      <p>Complete binge-ready shows, including Dark, Chernobyl, Squid Game, Game of Thrones and True Detective.</p>
+    </div>
+  </section>
+
+  <section class="request" aria-label="Request a title">
+    <h3>Request a movie or series</h3>
+    <p>Want something added? Tell me the title and I will see what I can do.</p>
+    <form id="reqForm">
+      <!-- Paste your Web3Forms access key below -->
+      <input type="hidden" name="access_key" value="bf92c771-58bb-494c-b9c7-46d3fe370387">
+      <input type="hidden" name="subject" value="New request for Swastik's server">
+      <input type="hidden" name="from_name" value="Server request form">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+      <input type="text" name="name" placeholder="Your name (optional)" maxlength="60" autocomplete="name">
+      <textarea name="message" placeholder="Movie or web series title, and year if you know it" required maxlength="500"></textarea>
+      <button type="submit" id="sendBtn">Send request</button>
+      <p id="status" role="status"></p>
+    </form>
+  </section>
+
+  <p class="note">
+    <strong>Disclaimer:</strong> Gentle reminder, since this server only runs when my laptop is ON,
+    so if you cannot access the server, please mail to
+    <a href="mailto:swastikbehera.tech@gmail.com">swastikbehera.tech@gmail.com</a>
+  </p>
+</main>
+<script>
+  const f=document.getElementById('reqForm'),st=document.getElementById('status'),b=document.getElementById('sendBtn');
+  f.addEventListener('submit',async e=>{
+    e.preventDefault(); b.disabled=true; st.textContent='Sending...';
+    try{
+      const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)});
+      const d=await r.json();
+      if(d.success){st.textContent='Thanks! Your request was sent.'; f.reset();}
+      else{st.textContent='Could not send. Please try again, or email me below.';}
+    }catch(err){st.textContent='Could not send. Please check your internet and try again.';}
+    b.disabled=false;
+  });
+</script>
+</body>
+</html>
