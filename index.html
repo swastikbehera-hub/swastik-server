@@ -49,9 +49,23 @@
   .shelf{display:grid; gap:1.25rem; grid-template-columns:1fr 1fr; margin-bottom:2rem}
   .shelf div{border-left:3px solid var(--teal); padding-left:.9rem}
   .shelf p{margin:0; color:var(--muted); font-size:.97rem}
-  .note{color:var(--muted); font-size:.92rem; border-top:1px solid #ffffff1f; padding-top:1.25rem}
-  .note strong{color:var(--ink)}
-  .note a{color:var(--teal)}
+  dialog{
+    border:1px solid #ffffff33; border-radius:.9rem; background:#231636; color:var(--ink);
+    padding:1.6rem 1.5rem 1.4rem; width:min(92vw,28rem); font:inherit;
+  }
+  dialog::backdrop{background:#000000b3}
+  dialog p{margin:0 0 1.25rem; font-size:1rem; color:var(--muted)}
+  dialog strong{color:var(--ink)}
+  dialog a{color:var(--teal)}
+  .dlg-actions{display:flex; gap:.7rem; justify-content:flex-end; flex-wrap:wrap}
+  .dlg-actions a, .dlg-actions button{
+    font:700 1rem "DM Sans",sans-serif; border-radius:.55rem; padding:.7rem 1.3rem;
+    cursor:pointer; text-decoration:none; text-align:center;
+  }
+  .dlg-actions .go{background:var(--ticket); color:var(--ticket-ink); border:0}
+  .dlg-actions .go:hover{background:#ffd25c}
+  .dlg-actions .cancel{background:transparent; color:var(--ink); border:1px solid #ffffff44}
+  dialog a:focus-visible, dialog button:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
 
   .request{margin-bottom:2rem}
   .request h3{margin-bottom:.25rem}
@@ -119,13 +133,27 @@
     </form>
   </section>
 
-  <p class="note">
-    <strong>Disclaimer:</strong> Gentle reminder, since this server only runs when my laptop is ON,
-    so if you cannot access the server, please mail to
-    <a href="mailto:swastikbehera.tech@gmail.com">swastikbehera.tech@gmail.com</a>
-  </p>
+  <dialog id="disclaimer" aria-label="Disclaimer">
+    <p>
+      <strong>Disclaimer:</strong> Gentle reminder, since this server only runs when my laptop is ON,
+      so if you cannot access the server, please mail to
+      <a href="mailto:swastikbehera.tech@gmail.com">swastikbehera.tech@gmail.com</a>
+    </p>
+    <div class="dlg-actions">
+      <button type="button" class="cancel" id="dlgCancel">Cancel</button>
+      <a class="go" id="dlgGo" href="https://miracle.tailb5bf53.ts.net/signup/">Continue</a>
+    </div>
+  </dialog>
 </main>
 <script>
+  // Enter server: show the disclaimer first, then continue to the link
+  const enterBtn=document.querySelector('.enter'),dlg=document.getElementById('disclaimer');
+  document.getElementById('dlgGo').href=enterBtn.href;
+  if(dlg && typeof dlg.showModal==='function'){
+    enterBtn.addEventListener('click',e=>{e.preventDefault(); dlg.showModal();});
+    document.getElementById('dlgCancel').addEventListener('click',()=>dlg.close());
+    dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); }); // click outside closes
+  }
   const f=document.getElementById('reqForm'),st=document.getElementById('status'),b=document.getElementById('sendBtn');
   f.addEventListener('submit',async e=>{
     e.preventDefault(); b.disabled=true; st.textContent='Sending...';
@@ -133,7 +161,7 @@
       const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(f)});
       const d=await r.json();
       if(d.success){st.textContent='Thanks! Your request was sent.'; f.reset();}
-      else{st.textContent='Could not send. Please try again, or email me below.';}
+      else{st.textContent='Could not send. Please try again, or email swastikbehera.tech@gmail.com.';}
     }catch(err){st.textContent='Could not send. Please check your internet and try again.';}
     b.disabled=false;
   });
